@@ -4,58 +4,6 @@
 
 Este projeto implementa um simulador simplificado de escalonamento de containers inspirado no Kubernetes.
 
-O sistema possui:
-
-- Pods
-- Workers
-- Scheduler
-
-O Scheduler é responsável por decidir em qual Worker cada Pod será executado, considerando recursos disponíveis.
-
----
-
-## Recursos considerados
-
-- CPU
-- Memória RAM
-- Disco
-- Latência
-
----
-
-## Estrutura do Projeto
-
-- pod.h / pod.cpp
-  - Representação dos Pods
-
-- worker.h / worker.cpp
-  - Representação dos Workers
-
-- scheduler.h / scheduler.cpp
-  - Implementação do algoritmo de escalonamento
-
-- main.cpp
-  - Simulação do cluster
-
----
-
-## Compilação
-
-```bash
-g++ *.cpp -o scheduler
-
-
-./scheduler
-rm README.md
-
-
-cat > README.md << 'EOF'
-# Simulador de Escalonamento de Containers
-
-## Descrição
-
-Este projeto implementa um simulador simplificado de escalonamento de containers inspirado no Kubernetes.
-
 O sistema é composto por:
 
 - Pods
@@ -66,57 +14,48 @@ O Scheduler é responsável por decidir em qual Worker cada Pod será executado,
 
 ---
 
-## Recursos Considerados
+## Objetivo
 
-O algoritmo de escalonamento utiliza:
+Simular o processo de escalonamento de containers em um cluster, considerando limitações de CPU, memória e disco.
+
+---
+
+## Recursos Considerados
 
 - CPU
 - Memória RAM
 - Disco
-- Latência
 
-A decisão de alocação é realizada através de uma pontuação (score), calculada com base na disponibilidade dos recursos de cada Worker.
+Cada Pod possui requisitos específicos e cada Worker possui capacidade limitada.
 
 ---
 
 ## Estrutura do Projeto
 
+### main.cpp
+
+Responsável por:
+
+- Criar os Workers
+- Criar os Pods
+- Executar o escalonamento
+- Exibir relatórios
+
 ### pod.h / pod.cpp
 
-Representam os Pods (containers) que serão executados no cluster.
-
-Cada Pod possui:
-
-- Nome
-- CPU necessária
-- Memória necessária
-- Espaço em disco necessário
+Implementação da classe Pod.
 
 ### worker.h / worker.cpp
 
-Representam os Workers do cluster.
-
-Cada Worker possui:
-
-- CPU total
-- Memória total
-- Disco total
-- Latência
-- Lista de Pods alocados
+Implementação da classe Worker.
 
 ### scheduler.h / scheduler.cpp
 
-Implementam o algoritmo de escalonamento responsável por selecionar o melhor Worker para cada Pod.
-
-### main.cpp
-
-Responsável pela criação do cluster, geração dos Pods, execução do escalonamento e exibição dos relatórios.
+Implementação do algoritmo de escalonamento.
 
 ---
 
 ## Compilação
-
-Execute:
 
 g++ *.cpp -o scheduler
 
@@ -124,44 +63,25 @@ g++ *.cpp -o scheduler
 
 ## Execução
 
-Execute:
-
 ./scheduler
 
 ---
 
-## Funcionalidades Implementadas
+## Funcionalidades
 
 - Criação de múltiplos Workers
 - Criação automática de Pods
-- Escalonamento baseado em múltiplos recursos
+- Escalonamento baseado em recursos
 - Controle de capacidade dos Workers
-- Rejeição de Pods quando não há recursos suficientes
-- Relatório detalhado de alocação
-- Estatísticas globais do cluster
-
----
-
-## Exemplo de Saída
-
-O programa exibe:
-
-- Alocação de cada Pod
-- Lista de Pods por Worker
-- Recursos livres de cada Worker
-- Estatísticas globais do cluster
-
-Exemplo:
-
-POD1 -> Worker01
-POD2 -> Worker03
-POD3 -> Worker02
+- Rejeição de Pods sem recursos disponíveis
+- Relatórios detalhados
+- Estatísticas do cluster
 
 ---
 
 ## Resultados Obtidos
 
-Execução realizada com:
+Cluster utilizado:
 
 - 3 Workers
 - 20 Pods
@@ -171,11 +91,20 @@ Resultado:
 - 13 Pods alocados
 - 7 Pods rejeitados
 
-Utilização do cluster:
+Utilização:
 
 - CPU: 88%
 - RAM: 95%
 - Disco: 21%
+
+---
+
+## Tecnologias
+
+- C++
+- Linux (Ubuntu WSL)
+- Git
+- GitHub
 
 ---
 
